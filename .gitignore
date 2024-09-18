@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CRUDMauiAppTask2/.vs
+/CRUDMauiAppTask2/bin/Debug
+/CRUDMauiAppTask2/obj

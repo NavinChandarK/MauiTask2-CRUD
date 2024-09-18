@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CRUDMauiAppTask2.Views.EmployeeDetailsPage"
+             xmlns:vm="clr-namespace:CRUDMauiAppTask2.ViewModels"
+             Title="Employee Details"
+             x:DataType="vm:EmployeeDetailsViewModel">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Frame Padding="10" Margin="10" CornerRadius="10" HasShadow="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="FirstName" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="0" Padding="5"/>
+                <Label Text="-" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="1" Padding="5"/>
+                <Label Text="{Binding Employee.FirstName}" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2" Padding="5"/>
+            </Grid>
+        </Frame>
+
+        <Frame Padding="10" Margin="10" CornerRadius="10" HasShadow="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="LastName" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="0" Padding="5"/>
+                <Label Text="-" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="1" Padding="5"/>
+                <Label Text="{Binding Employee.LastName}" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2" Padding="5"/>
+            </Grid>
+        </Frame>
+
+        <Frame Padding="10" Margin="10" CornerRadius="10" HasShadow="True" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="Email" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="0" Padding="5"/>
+                <Label Text="-" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="1" Padding="5"/>
+                <Label Text="{Binding Employee.Email}" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2" Padding="5"/>
+            </Grid>
+        </Frame>
+
+        <Frame Padding="10" Margin="10" CornerRadius="10" HasShadow="True" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="PhoneNumber" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="0" Padding="5"/>
+                <Label Text="-" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" Grid.Column="1" Padding="5"/>
+                <Label Text="{Binding Employee.PhoneNumber}" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2" Padding="5"/>
+            </Grid>
+        </Frame>
+
+    </Grid>
+</ContentPage>

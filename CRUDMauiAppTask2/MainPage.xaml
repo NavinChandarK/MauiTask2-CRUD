@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CRUDMauiAppTask2.MainPage"
+             xmlns:model ="clr-namespace:CRUDMauiAppTask2.Models"
+             xmlns:viewmodel ="clr-namespace:CRUDMauiAppTask2.ViewModels"
+             x:DataType ="viewmodel:EmployeesViewModel"
+             Title="{Binding Title}">
+    
+        <Grid ColumnSpacing="1" RowSpacing="1" Padding="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+            
+        <Button Text="Add Employee"
+                BackgroundColor="OrangeRed"
+         Command="{Binding ShowFormCommand}"
+         Grid.Row="0"
+         Margin="9"
+         IsVisible="{Binding IsGridVisible}"/>
+
+        <VerticalStackLayout Padding="5" Grid.Row="0" Margin="9" IsVisible="{Binding IsFormVisible}">
+            <Entry x:Name="FirstName" Placeholder="Enter FirstName" Text="{Binding FirstName}" />
+            <Entry x:Name="LastName" Placeholder="Enter LastName" Text="{Binding LastName}"/>
+            <Entry x:Name="Email" Placeholder="Enter Email" Text="{Binding Email}"/>
+            <Entry x:Name="PhoneNumber" Placeholder="Enter PhoneNumber" Text="{Binding PhoneNumber}"/>
+        </VerticalStackLayout>
+
+
+        <Button Text="{Binding AddEditButtonText}" Grid.Row="1" IsEnabled="{Binding IsNotLoading}"
+              Command="{Binding SaveEmployeeCommand}" Margin="9" IsVisible="{Binding IsFormVisible}"/>
+
+        <Button Text="Clear Form" Command="{Binding ClearFormCommand}" IsEnabled="{Binding IsNotLoading}" 
+              Grid.Row="2" Margin="9" IsVisible="{Binding IsFormVisible}"/>
+        <Button Text="Back To List" Command="{Binding ShowGridCommand}" IsEnabled="{Binding IsNotLoading}" 
+       Grid.Row="3" Margin="9" IsVisible="{Binding IsFormVisible}"/>
+            
+        <RefreshView Grid.Row="4"
+                   Command="{Binding GetEmployeeListCommand}" 
+                   IsRefreshing="{Binding IsRefreshing}"
+                  IsVisible="{Binding IsGridVisible}">
+            <CollectionView ItemsSource="{Binding Employees}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Employee">
+                        <Grid Padding="10" ColumnDefinitions="*, auto">
+                            <Frame HeightRequest="70" Grid.Column="0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EmployeesViewModel}}, Path=GetEmployeeDetailsCommand }" 
+                                                        CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                                <HorizontalStackLayout Padding="5" Spacing="5">
+                                    <Label Text="{Binding FirstName}"></Label>
+                                    <Label Text="{Binding LastName}"></Label>
+                                    <Label Text="-"></Label>
+                                    <Label Text="{Binding Email}"></Label>
+                                    <Label Text=","></Label>
+                                    <Label Text="{Binding PhoneNumber}"></Label>
+                                </HorizontalStackLayout>
+                            </Frame>
+                            <HorizontalStackLayout Grid.Column="1">
+                                <Button Text="Edit" BackgroundColor="Green" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EmployeesViewModel}}, Path=SetEditModeCommand}" 
+                                                        CommandParameter="{Binding Id}" Margin="9"/>
+                                <Button Text="Delete" BackgroundColor="#C30010" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EmployeesViewModel}}, Path=DeleteEmployeeCommand }" 
+                                                        CommandParameter="{Binding Id}" Margin="9"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
